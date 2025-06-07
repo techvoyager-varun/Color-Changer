@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <title>Color Gradient Template</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to right , #ff4d4d , #070709);
+    }
+
+    .splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(to right , #ff4d4d , #070709);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 29px;
+      z-index: 9999;
+      animation: fadeOut 2s ease forwards;
+      animation-delay: 2.5s;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(229, 216, 216, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      color: white;
+      max-width: 500px;
+      width: 90%;
+      z-index: 1;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .left-btn {
+      background-color: #ff4d4d;
+      color: white;
+    }
+
+    .right-btn {
+      background-color: #070709;
+      color: white;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    #colorText {
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(215, 211, 221);
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+    }
+
+    h2 {
+      color: rgb(7, 26, 49);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Splash Screen -->
+  <div class="splash-screen">
+    <div>Entering Color World...</div>
+    <div style="font-size: 16px; margin-top: 10px;">Made with ❤️ by Varun Rawat</div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <div class="buttons">
+      <button id="left-btn" class="left-btn">Left Color</button>
+      <button id="right-btn" class="right-btn">Right Color</button>
+    </div>
+    <h3>Click below to Copy</h3>
+    <p id="colorText">background: linear-gradient(to right , #ff4d4d , #070709);</p>
+    <br>
+    <h2>Welcome To Color World</h2>
+  </div>
+
+<script>
+  let btn1 = document.getElementById("left-btn");
+  let btn2 = document.getElementById("right-btn");
+  let text = document.getElementById("colorText");
+
+  let color1 = "#ff4d4d";
+  let color2 = "#070709";
+
+  function changebtn1() {
+    let hex = "0123456789abcdef";
+    let color1 = "#";
+    for (let i = 0; i < 6; i++) {
+      color1 += hex[Math.floor(Math.random() * 16)];
+    }
+    btn1.innerHTML = color1;
+    return color1;
+  }
+
+  function changebtn2() {
+    let hex = "0123456789abcdef";
+    let color2 = "#";
+    for (let i = 0; i < 6; i++) {
+      color2 += hex[Math.floor(Math.random() * 16)];
+    }
+    btn2.innerHTML = color2;
+    return color2;
+  }
+
+  btn1.addEventListener("click", () => {
+    color1 = changebtn1();
+    document.body.style.background = `linear-gradient(to right, ${color1}, ${color2})`;
+    text.innerHTML = `background: linear-gradient(to right , ${color1} , ${color2});`;
+    btn1.style.backgroundColor = color1;
+  });
+
+  btn2.addEventListener("click", () => {
+    color2 = changebtn2();
+    document.body.style.background = `linear-gradient(to right, ${color1}, ${color2})`;
+    text.innerHTML = `background: linear-gradient(to right , ${color1} , ${color2});`;
+    btn2.style.backgroundColor = color2;
+  });
+
+  text.addEventListener("click", () => {
+    const copyText = text.innerText;
+    navigator.clipboard.writeText(copyText).then(() => {
+      text.innerHTML = "Copied";
+      setTimeout(() => {
+        text.innerHTML = `background: linear-gradient(to right , ${color1} , ${color2});`;
+      }, 1000);
+    });
+  });
+</script>
+
+</body>
+</html>
